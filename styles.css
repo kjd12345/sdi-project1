@@ -1,0 +1,106 @@
+body {
+  background-image: url("https://www.americangamingsupply.com/images/products/detail/GCLO-283.jpg");
+  /* "https://www.americangamingsupply.com/images/products/detail/GCLO-283.jpg" regular background */
+  /* "https://c.tenor.com/ZDe0dPKLr3AAAAAi/raining-money-money.gif" transparent flying money gif */
+  background-color: #308834;
+ }
+
+
+#newGameButton { /* Here is the syling for the newGameButton*/
+  position: absolute;
+  background-color: black;
+  color: white;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  bottom: 10px;
+}
+
+#playerScore {
+  position: absolute;
+  color: white;
+  font-size: 40px;
+  bottom: 10px;
+  right: 200px;
+}
+
+.cardholder {
+  position: absolute;
+  background-color: black;
+  width: 186px;
+  height: 264px;
+}
+
+#playerCard1 {
+  right: calc(50% + 307px);
+  top: 60%;
+}
+
+#playerCard2 {
+  right: calc(50% + 107px);
+  top: 60%;
+}
+
+#playerCard3 {
+  right: calc(50% - 93px);
+  top: 60%;
+}
+
+#playerCard4 {
+  right: calc(50% - 293px);
+  top: 60%;
+}
+
+#playerCard5 {
+  right: calc(50% - 493px);
+  top: 60%;
+}
+
+#hitButton {
+  position: absolute;
+  background-color: #FF9E9E;
+  width: 250px;
+  height: 75px;
+  border-radius: 15px;
+  font-size: 40px;
+  text-align: center;
+  line-height: 75px;
+  right: 5%;
+  top: 40%;
+  border-style: solid;
+  border-color: black;
+}
+
+#standButton {
+  position: absolute;
+  background-color: #9EFFBF;
+  width: 250px;
+  height: 75px;
+  border-radius: 15px;
+  font-size: 40px;
+  text-align: center;
+  line-height: 75px;
+  right: 5%;
+  top: 50%;
+  border-style: solid;
+  border-color: black;
+}
+
+
+/* #hitButton:hover {
+  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+  animation: rainbow_animation 6s ease-in-out infinite;
+  background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+  0%,100% {
+      background-position: 0 0;
+  }
+
+  50% {
+      background-position: 100% 0;
+  }
+} */

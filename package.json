@@ -1,0 +1,27 @@
+{
+  "name": "project1-scaffold",
+  "version": "1.0.0",
+  "description": "Add any files you see fit for your application to work. Make sure to change this README to include a description of your application and how to get it started.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest /test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kjd12345/sdi-blended-project1-scaffold.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kjd12345/sdi-blended-project1-scaffold/issues"
+  },
+  "homepage": "https://github.com/kjd12345/sdi-blended-project1-scaffold#readme",
+  "dependencies": {
+    "node-fetch": "^3.2.4"
+  },
+  "devDependencies": {
+    "jest": "^28.1.0"
+  }
+}
