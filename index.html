@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="./src/index.js" async></script>
+  <title>Blackjack Game</title>
+</head>
+  <header>
+    <p id="dealerScore">Dealer Score: </p>
+  </header>
+  <body>
+
+    <p id="gameOutcome" hidden>This paragraph should be hidden.</p>
+    <!-- Player Cards ./src/cardback.png -->
+
+      <img id="playerCard1" class="rounded cardholder" src="https://m.media-amazon.com/images/I/51uITWtTYFL._AC_.jpg" width="186" height="264"></img>
+        <!-- document.getElementById('playerCard1').src= playerCard1; -->
+      <img id="playerCard2" class="rounded cardholder" src="https://m.media-amazon.com/images/I/51uITWtTYFL._AC_.jpg" width="186" height="264"></img>
+      <img id="playerCard3" class="rounded cardholder" src="https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png" width="186" height="264"></img>
+      <img id="playerCard4" class="rounded cardholder" src="https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png" width="186" height="264"></img>
+      <img id="playerCard5" class="rounded cardholder" src="https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png" width="186" height="264"></img>
+
+
+    <!-- Hit/Stay Buttons -->
+    <button type="button" id="hitButton" class="button" >Hit</button>
+    <!-- <script>
+      let standButton = document.getElementById("standButton")
+      standButton.addEventListener("click", alert('button was clicked from js'));
+    </script> -->
+    <button type="button" id="standButton" class="button">Stand</div>
+
+  </body>
+
+
+
+
+  <footer>
+
+    <button type="button" id="newGameButton" class="button" onclick="document.location.reload()">New Game</button>
+        <!-- New Game Button -->
+    <div id="playerScore">Player Score:</div>
+        <!-- This Holds The Players Score -->
+
+  </footer>
+
+
+</html>
+
+
+<!-- https://deckofcardsapi.com/static/img/3D.png -->
+
+<!-- <img src="" width="5" height="6"> -->
+

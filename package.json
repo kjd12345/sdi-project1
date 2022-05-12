@@ -2,9 +2,10 @@
   "name": "project1-scaffold",
   "version": "1.0.0",
   "description": "Add any files you see fit for your application to work. Make sure to change this README to include a description of your application and how to get it started.",
-  "main": "index.js",
+  "main":"index.js",
+  "type": "module",
   "scripts": {
-    "start": "node index.js",
+    "start": "live-server .",
     "test": "jest /test"
   },
   "repository": {
@@ -19,7 +20,8 @@
   },
   "homepage": "https://github.com/kjd12345/sdi-blended-project1-scaffold#readme",
   "dependencies": {
-    "node-fetch": "^3.2.4"
+    "live-server": "^1.2.2",
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
     "jest": "^28.1.0"
