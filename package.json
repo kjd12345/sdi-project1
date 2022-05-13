@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "live-server .",
-    "test": "jest /test"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest /test"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/kjd12345/sdi-blended-project1-scaffold#readme",
   "dependencies": {
+    "jsdom": "^19.0.0",
     "live-server": "^1.2.2",
     "node-fetch": "^2.6.7"
   },

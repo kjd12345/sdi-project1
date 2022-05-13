@@ -1,5 +1,5 @@
 import Player from "./player.js";
-// import fetch from "node-fetch";  //this is needed to run npm test, but breaks the npm start implementation.
+import fetch from "node-fetch";  //this is needed to run npm test, but breaks the npm start implementation.
 
 // async function loadMyModule() {
 //   const { fetch } = await import('node-fetch');
@@ -55,12 +55,12 @@ export default class Game {
       this.typeOfOutCome = "You Died"; // textColor: red background: Black
     }
 
-   //if player wins
+    //if player wins
     if(this.player.score > this.dealerScore || this.dealerScore > 21){
       this.typeOfOutCome = "Winner Winner Chicken Dinner";
     }
 
-   //if tie
+    //if tie
     if(this.player.score === this.dealerScore){
         this.typeOfOutCome = "No Harm in Trying";
     }

@@ -1,4 +1,5 @@
 // const Player = require('../src').Player;
+
 import Player from "../src/player.js"
 
 let testPlayer;
@@ -38,16 +39,3 @@ describe('Test The Player Class', () => {
     expect(testPlayer.score).toBe(12)
   })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-//40% chance of winning in the game

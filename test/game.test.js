@@ -2,11 +2,30 @@
 // const require = createRequire(import.meta.url);
 // const Game = require('../src').Game;
 import Player from "../src/player.js"
-import Game from "../src/Game";
+import Game from "../src/game2.js";
 
+import { JSDOM } from "jsdom";
+
+let dom;
 let testGame;
+let sampleCard = {
+  "image": "http://deckofcardsapi.com/static/img/2C.png",
+  "value": "2",
+  "suit": "CLUBS",
+  "code": "2C"
+}
 
 describe('Test The Game Class', () => {
+  beforeAll(async() => {
+    JSDOM.fromFile("./index.html")
+    .then(newDom => {
+      dom = newDom;
+    }).then( () => {
+      global.document = dom.window.document;
+      global.window = dom.window;
+    })
+  })
+
   beforeEach(async() => {
     testGame = await Game.buildGame()
   })
@@ -39,55 +58,76 @@ describe('Test The Game Class', () => {
       let newScore = testGame.player.score
       expect(previousScore < newScore).toBe(true)
     })
-
-      test("busts the player when their score is over 21 after they draw a card", async () => {
-        for(let i = 0; i < 8;i++){
-          await testGame.drawCard(testGame.player)
-        }
-        expect(testGame.typeOfOutCome).toBe("busted")
-      })
+    test("busts the player when their score is over 21 after they draw a card", async () => {
+      for(let i = 0; i < 11;i++){
+        testGame.player.hand.push(sampleCard);
+      }
+      await testGame.drawCard(testGame.player);
+      expect(testGame.typeOfOutCome).toBe("Busted")
+    })
+    test("if player's hand is greater than 4, set outcome and endgame", async () => {
+      testGame.player.hand = [];
+      for(let i = 0; i < 4;i++){
+        testGame.player.hand.push(sampleCard);
+      }
+      await testGame.drawCard(testGame.player);
+      expect(testGame.typeOfOutCome).toBe("Winner Winner Chicken Dinner")
+    })
 
   })
 
   describe("tests the stand() method", () => {
     beforeEach( async() => {
       await testGame.stand();
-    } )
+    })
     test("dealerScore should be set", () => {
       expect(typeof testGame.dealerScore).toBe('number');
       expect(testGame.dealerScore).toBeGreaterThan(0) //this means the score was reassigned
     })
+  })
+
+  describe('tests the evaluateOutcome() method', () => {
     test("if player score is greater than dealer score, player wins", async () => {
-      testGame.player.score = 29;
-      await testGame.stand();
+      testGame.player.score = 21;
+      testGame.dealerScore = 18
+      testGame.evaluateOutcome();
+      expect(testGame.typeOfOutCome).toEqual("Winner Winner Chicken Dinner");
+    })
+    test("if the dealer busts, player wins", async () => {
+      testGame.player.score = 17;
+      testGame.dealerScore = 24;
+      testGame.evaluateOutcome();
       expect(testGame.typeOfOutCome).toEqual("Winner Winner Chicken Dinner");
     })
     test("if dealer score is greater than player, player loses", async () => {
-      testGame.player.score = 16;
-      await testGame.stand();
-      expect(testGame.typeOfOutCome).toEqual("You Died");
+        testGame.player.score = 17;
+        testGame.dealerScore = 21;
+        testGame.evaluateOutcome();
+        expect(testGame.typeOfOutCome).toEqual("You Died");
     })
-    test("if player length is greater than 5 call stand", async () => {
-      testGame.player.hand.length = 16;//sets the ammount of cards the player has drawn
-      testGame.drawCard(testGame.player)
-      expect(testGame.typeOfOutCome).toBe("Winner Winner Chicken Dinner")
+    test("if scores are tied, it is a tie", async () => {
+      testGame.player.score = 18;
+      testGame.dealerScore = 18;
+      testGame.evaluateOutcome();
+      expect(testGame.typeOfOutCome).toEqual("No Harm in Trying");
     })
-    player.score
-    test("if player score is greater than 21 is busted", async () => {
-      testGame.player.score = 21;//sets the ammount of cards the player has drawn
-      testGame.drawCard(testGame.player)
-      expect(testGame.typeOfOutCome).toBe("Busted")
+  })
+
+  describe("tests the endGame() method", () => {
+    beforeEach( () => {
+      testGame.dealerScore = 17;
+      testGame.typeOfOutCome = 'Winner Winner Chicken Dinner';
+      testGame.endGame();
     })
-    test("if player length is greater than5 call stand", async () => {
-      testGame.player.hand.length = 16;//sets the ammount of cards the player has drawn
-      testGame.drawCard(testGame.player)
-      expect(testGame.typeOfOutCome).toBe("")
+    test("dealerScore should be set on the page", () => {
+      expect(document.getElementById("dealerScore").innerText).toEqual(`Dealer Score: 17`);
     })
-    // this can't be tested because the score for dealer and comparison are both assigned within stand()
-    //test("if scores are tied, it is a tie", async () => {
-    //   testGame.player.score = testGame.dealerScore;
-    //   expect(testGame.typeOfOutCome).toEqual("No Harm in Trying");
-    // })
+    test("gameOutcome text should be set on the page", () => {
+      expect(document.getElementById('gameOutcome').innerText).toEqual(`Winner Winner Chicken Dinner`);
+    })
+    test("gameOutcome text should be not hidden", () => {
+      expect(document.getElementById('gameOutcome').hidden).toEqual(false);
+    })
   })
 
 })
