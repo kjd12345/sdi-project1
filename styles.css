@@ -126,6 +126,12 @@ body {
   background-size: 400% 100%;
 }
 
+#standButton:hover {
+  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+  animation: rainbow_animation 6s ease-in-out infinite;
+  background-size: 400% 100%;
+}
+
 @keyframes rainbow_animation {
   0%,100% {
       background-position: 0 0;
@@ -134,4 +140,45 @@ body {
   50% {
       background-position: 100% 0;
   }
+}
+
+#tempCard {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 5px 5px;
+}
+
+.movedIn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.moveCardIn {
+  animation: cardEntry 0.8s ease;
+  animation-fill-mode: forwards;
+}
+
+.moveCardOut {
+  animation: cardExit 0.8s ease;
+  animation-fill-mode: backwards;
+}
+
+@keyframes cardEntry {
+  0%   {left:50%; top:-50%;}
+  /* 25%  {left:50%; top:0px;}
+  50%  {left:50%; top:200px;}
+  75%  {left:50%; top:200px;} */
+  100% {left:50%; top:50%;}
+}
+
+@keyframes cardExit {
+  0%   {left:50%; top:50%;}
+  /* 25%  {left:50%; top:0px;}
+  50%  {left:50%; top:200px;}
+  75%  {left:50%; top:200px;} */
+  100% {left:50%; top:-50%;}
 }

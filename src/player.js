@@ -5,7 +5,6 @@ export default class Player {
   }
 
   // updates a Player's score
-
   updateScore() {
     let newScore = 0;
     let faceCards = ["JACK", "QUEEN", "KING"];

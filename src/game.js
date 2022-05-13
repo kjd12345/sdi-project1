@@ -1,13 +1,7 @@
-// import fetch from "node-fetch";
-// const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
-// const fetch = require('node-fetch');
-// const Player = require('./player');
 import Player from "./player.js";
 
 export default class Game {
-
    constructor (deck_id) {
-    // console.log(deck_id)
       if (typeof deck_id === 'undefined') {
         throw new Error('Cannot be called directly');
       }
@@ -15,9 +9,9 @@ export default class Game {
     this.player  = new Player();
     this.deck_id = deck_id
     this.dealerScore = Math.floor((Math.random() * (25 - 17 + 1) + 17)/2); //this will need to be removed when the dealer becomes a true player
-
   }
-  async drawCard(player){
+
+  async drawCard(player) {
     player.hand.push(await fetch("http://deckofcardsapi.com/api/deck/"+this.deck_id+"/draw/?count=1")
       .then(response => response.json())
       .then(formattedData => formattedData.cards[0])
@@ -25,34 +19,29 @@ export default class Game {
     )
 
     player.updateScore()
-    if(player.score > 21){
-      this.typeOfOutCome = "Busted"
-      this.endGame()
+    if(player.score > 21) {
+        this.typeOfOutCome = "Busted"
+        this.endGame()
+    } else if(player.hand.length === 5) {
+        this.typeOfOutCome = "Winner Winner Chicken Dinner"
+        this.endGame();
+    } else if(player.score === 21) {
+        this.stand();
     }
   }
 
-  endGame(){
+  //ends the game
+  endGame() {
     let gameOutcomeElement = document.getElementById('gameOutcome');
-
-    //ends the game
-      //switch(if else) (this.typeOfOutCome)
-        //won winning animation
-          //the money falling
-        //lost loosing animation
-          //pops up you died
-        //busted busted animation
-          //https://media3.giphy.com/media/xT5LMzWVNsfgu6srOU/200.gif
-
+    document.getElementById("dealerScore").innerText = `Dealer Score: ${this.dealerScore}`;
     gameOutcomeElement.innerText = this.typeOfOutCome;
     gameOutcomeElement.hidden = false;
   }
 
-  async stand(){
-  //this will simulate a real dealer using real fetch methods is why this is async
+  async stand() {
+    //this will simulate a real dealer using real fetch methods is why this is async
     //calc the dealerscore
     //score between 25 and 17
-
-
     this.dealerScore += Math.floor((Math.random() * (25 - 17 + 1) + 17)/2);
 
     //check the dealerScore against playerScore
@@ -72,8 +61,20 @@ export default class Game {
     this.endGame();
   }
 
-// export default;
 
+  static async buildGame () {
+      let numOfDecks = 1; //allows us in the future to apply more decks
+      //await pauses the buildGame method until the value of the fetch is returned
+        let deck_id = await fetch("http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count="+numOfDecks)
+          .then((response) => response.json())
+          .then((formattedData) => formattedData.deck_id) //returns the Deck ID
+          .catch(error => console.warn(error))
+        return new Game(deck_id);
+  }
+
+}
+
+// Example API response when drawing two cards
 // {
 //   "success": true,
 //   "cards": [
@@ -93,17 +94,3 @@ export default class Game {
 //   "deck_id":"3p40paa87x90",
 //   "remaining": 50
 // }
-
-  static async buildGame () {
-      let numOfDecks = 1; //allows us in the future to apply more decks
-      //await pauses the buildGame method until the value of the fetch is returned
-        let deck_id = await fetch("http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count="+numOfDecks)
-          .then((response) => response.json())
-          .then((formattedData) => formattedData.deck_id) //returns the Deck ID
-          .catch(error => console.warn(error))
-        return new Game(deck_id);
-  }
-
-}
-
-// module.exports = Game;

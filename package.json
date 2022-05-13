@@ -2,7 +2,7 @@
   "name": "project1-scaffold",
   "version": "1.0.0",
   "description": "Add any files you see fit for your application to work. Make sure to change this README to include a description of your application and how to get it started.",
-  "main":"index.js",
+  "main": "./src/index.js",
   "type": "module",
   "scripts": {
     "start": "live-server .",
