@@ -4,7 +4,7 @@ import Player from "./player.js";
 try {
     var fetchHandler = fetch;
 } catch {
-    console.log('using node')
+    // console.log('using node')
     var fetchHandler = require("node-fetch");
 }
 
@@ -16,7 +16,6 @@ export default class Game {
         this.typeOfOutCome
         this.player = new Player();
         this.dealer = new Player();
-        this.dealer.hand;
         this.deck_id = deck_id;
     }
 

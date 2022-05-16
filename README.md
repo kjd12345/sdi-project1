@@ -1,6 +1,6 @@
 # SDI #10 Project 1
 ## Summary
-The purpose of this project is to demonstrate our capability to do the following:
+<!-- The purpose of this project is to demonstrate our capability to do the following: -->
   <!-- - Build a static webpage
   - Layout a well designed static webpage using HTML & CSS
   - Make fetch requests to hydrate a static page with data

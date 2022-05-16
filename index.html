@@ -6,27 +6,30 @@
   <script type="module" src="./src/index.js" async></script>
   <title>Blackjack Game</title>
 </head>
+
   <header>
+    <!-- Dealer Score -->
     <p id="dealerScore" class="container">Dealer Score: </p>
   </header>
+
   <body>
     <img id="tempCard" class="rounded cardholder" src="./src/cardback.png"></img>
 
     <p id="gameOutcome" hidden>This paragraph should be hidden.</p>
-    <!-- Player Cards ./src/cardback.png -->
 
-      <img id="playerCard1" class="rounded cardholder" src="https://m.media-amazon.com/images/I/51uITWtTYFL._AC_.jpg" width="186" height="264">
-        <!-- document.getElementById('playerCard1').src= playerCard1; -->
-      <img id="playerCard2" class="rounded cardholder" src="https://m.media-amazon.com/images/I/51uITWtTYFL._AC_.jpg" width="186" height="264">
-      <img id="playerCard3" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
-      <img id="playerCard4" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
-      <img id="playerCard5" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
+    <!-- Player Cards -->
+    <img id="playerCard1" class="rounded cardholder" src="https://m.media-amazon.com/images/I/51uITWtTYFL._AC_.jpg" width="186" height="264">
+    <img id="playerCard2" class="rounded cardholder" src="https://m.media-amazon.com/images/I/51uITWtTYFL._AC_.jpg" width="186" height="264">
+    <img id="playerCard3" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
+    <img id="playerCard4" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
+    <img id="playerCard5" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
 
-      <img id="dealerCard1" class="rounded cardholder" src="./src/cardback.png" width="186" height="264">
-      <img id="dealerCard2" class="rounded cardholder" src="./src/cardback.png" width="186" height="264">
-      <img id="dealerCard3" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
-      <img id="dealerCard4" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
-      <img id="dealerCard5" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
+    <!-- Dealer Cards -->
+    <img id="dealerCard1" class="rounded cardholder" src="./src/cardback.png" width="186" height="264">
+    <img id="dealerCard2" class="rounded cardholder" src="./src/cardback.png" width="186" height="264">
+    <img id="dealerCard3" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
+    <img id="dealerCard4" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
+    <img id="dealerCard5" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
 
     <!-- Hit/Stay Buttons -->
     <button type="button" id="hitButton" class="button" >Hit</button>
@@ -34,21 +37,13 @@
 
   </body>
 
-
-
-
   <footer>
     <!-- New Game Button -->
     <button type="button" id="newGameButton" class="button" onclick="document.location.reload()">New Game</button>
-    <!-- This Holds The Players Score -->
+    <!-- Player Score -->
     <div id="playerScore" class="container">Player Score:</div>
   </footer>
 
 
 </html>
-
-
-<!-- https://deckofcardsapi.com/static/img/3D.png -->
-
-<!-- <img src="" width="5" height="6"> -->
 
