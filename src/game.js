@@ -1,127 +1,132 @@
 import Player from "./player.js";
 // import fetch from "node-fetch";  //this is needed to run npm test, but breaks the npm start implementation.
 
-let fetchHandler;
-
 try {
-  fetchHandler = fetch;
-}
-catch{
-  console.log('using node')
-  fetchHandler = require("node-fetch");
+    var fetchHandler = fetch;
+} catch {
+    console.log('using node')
+    var fetchHandler = require("node-fetch");
 }
 
 export default class Game {
-   constructor (deck_id) {
-      if (typeof deck_id === 'undefined') {
-        throw new Error('Cannot be called directly');
-      }
-    this.typeOfOutCome
-    this.player  = new Player();
-    this.dealer  = new Player();
-    this.dealer.hand
-    this.deck_id = deck_id
-    // this.dealerScore = Math.floor((Math.random() * (25 - 17 + 1) + 17)/2);
-    //the above will need to be removed when the dealer becomes a true player
-  }
-
-  async drawCard(player) {
-    player.hand.push(await fetchHandler("http://deckofcardsapi.com/api/deck/"+this.deck_id+"/draw/?count=1")
-      .then(response => response.json())
-      .then(formattedData => formattedData.cards[0])
-      .catch(err => {
-          this.typeOfOutCome = "Couldn't draw a card. Try again later."+ Math.random()
-          this.endGame();
-          console.log(err)
-          throw("OOPS,",err)
-      })
-    )
-    player.updateScore();
-    if(player === this.player) {
-      if(player.hand.length < 6) {
-        document.getElementById(`playerCard${player.hand.length}`).src = player.hand[player.hand.length - 1].image;
-        document.getElementById(`playerCard${player.hand.length}`).hidden = false;
-        document.getElementById("playerScore").innerText = `Player Score: ${player.score}`;
-      }
-      if(player.score > 21) {
-          this.typeOfOutCome = "Busted"
-          // this.dealerScore += Math.floor((Math.random() * (25 - 17 + 1) + 17)/2);
-          this.endGame()
-      } else if(player.hand.length > 4) {//5 card charlie rule will be implemented
-          // this.stand()
-          this.typeOfOutCome = "Winner Winner Chicken Dinner"
-          this.endGame();
-      } else if(player.score === 21) {
-          this.stand();
-      }
-    } else {
-      if(player.hand.length < 6) {
-        document.getElementById(`dealerCard${player.hand.length}`).src = player.hand[player.hand.length - 1].image;
-        document.getElementById(`dealerCard${player.hand.length}`).hidden = false;
-        document.getElementById("dealerScore").innerText = `Dealer Score: ${this.dealer.score}`;
-      }
-    }
-  }
-
-  //ends the game
-  endGame() {
-    let gameOutcomeElement = document.getElementById('gameOutcome')
-    gameOutcomeElement.innerText = this.typeOfOutCome;
-    setTimeout( () => {gameOutcomeElement.hidden = false}, 500);
-  }
-
-  evaluateOutcome() {
-    //check the dealerScore against playerScore
-    //if dealer wins
-    if(this.dealer.score > this.player.score && this.dealer.score <= 21){
-      this.typeOfOutCome = "You Lost\n"; // textColor: red background: Black
+    constructor(deck_id) {
+        if (typeof deck_id === 'undefined') {
+            throw new Error('Cannot be called directly');
+        }
+        this.typeOfOutCome
+        this.player = new Player();
+        this.dealer = new Player();
+        this.dealer.hand;
+        this.deck_id = deck_id;
     }
 
-   //if player wins
-    if(this.player.score > this.dealer.score || this.dealer.score > 21){
-      this.typeOfOutCome = "Winner Winner Chicken Dinner\n";
+    async drawCard(player) {
+        player.hand.push(await fetchHandler("http://deckofcardsapi.com/api/deck/" + this.deck_id + "/draw/?count=1")
+            .then(response => response.json())
+            .then(formattedData => formattedData.cards[0])
+            .catch(err => {
+                this.typeOfOutCome = "Couldn't draw a card. Try again later." + Math.random()
+                this.endGame();
+                console.log(err)
+                throw ("OOPS,", err)
+            })
+        )
+
+        player.updateScore(); //This will update the HTML to the new player's score
+        if (player === this.player) {
+            if (player.hand.length < 6) {
+                document.getElementById(`playerCard${player.hand.length}`)
+                    .src = player.hand[player.hand.length - 1].image;
+                document.getElementById(`playerCard${player.hand.length}`)
+                    .hidden = false;
+                document.getElementById("playerScore")
+                    .innerText = `Player Score: ${player.score}`;
+            }
+            if (player.score > 21) {
+                this.typeOfOutCome = "Busted"
+                this.endGame()
+            } else if (player.hand.length > 4) { //5 card charlie rule will be implemented
+                // this.stand()
+                this.typeOfOutCome = "Winner Winner Chicken Dinner"
+                this.endGame();
+            } else if (player.score === 21) {
+                this.stand();
+            }
+        } else {
+            if (player.hand.length < 6) {
+                document.getElementById(`dealerCard${player.hand.length}`)
+                    .src = player.hand[player.hand.length - 1].image;
+                document.getElementById(`dealerCard${player.hand.length}`)
+                    .hidden = false;
+                document.getElementById("dealerScore")
+                    .innerText = `Dealer Score: ${this.dealer.score}`;
+            }
+        }
     }
 
-   //if tie
-    if(this.player.score === this.dealer.score){
-        this.typeOfOutCome = "Push\n";
+    //ends the game
+    endGame() {
+        let gameOutcomeElement = document.getElementById('gameOutcome')
+        gameOutcomeElement.innerText = this.typeOfOutCome;
+        setTimeout(() => {
+            gameOutcomeElement.hidden = false
+        }, 500);
     }
 
-    this.endGame();
-  }
+    evaluateOutcome() {
+        //check the dealerScore against playerScore
+        //if dealer wins
+        if (this.dealer.score > this.player.score && this.dealer.score <= 21) {
+            this.typeOfOutCome = "You Lost"; // textColor: red background: Black
+        }
 
-  async stand() {
-    //this will simulate a real dealer using real fetch methods is why this is async
-    //calc the dealerscore
-    //score between 25 and 17
-    // this.dealerScore += Math.floor((Math.random() * (25 - 17 + 1) + 17)/2);
-    //if score is below 17 and dealer has less than 5 cards, continue to draw
-      //5-card Charlie is a special blackjack rule that states the player wins if
-      //he has 5 card hand without busting, providing 1.46% house edge
-    while(this.dealer.hand.length === 1 || (this.dealer.score < 17 && this.dealer.hand.length < 5)) {
-      await new Promise(r => setTimeout(() => r(), 500));
-      await this.drawCard(this.dealer);
+        //if player wins
+        if (this.player.score > this.dealer.score || this.dealer.score > 21) {
+            this.typeOfOutCome = "Winner Winner Chicken Dinner";
+        }
+
+        //if tie
+        if (this.player.score === this.dealer.score) {
+            this.typeOfOutCome = "Push";
+        }
+
+        this.endGame();
     }
 
-    this.evaluateOutcome();
-  }
+    async stand() { //this will simulate a real dealer using real fetch methods is why this is async
+        //calc the dealerscore
+        //score between 25 and 17
+        //if score is below 17 and dealer has less than 5 cards, continue to draw
+        //5-card Charlie is a special blackjack rule that states the player wins if
+        //he has 5 card hand without busting, providing 1.46% house edge
+        while (this.dealer.hand.length === 1 || (this.dealer.score < 17 && this.dealer.hand.length < 5)) {
+            await new Promise(r => setTimeout(() => r(), 500));
+            await this.drawCard(this.dealer);
+        }
+
+        this.evaluateOutcome();
+    }
 
 
-  static async buildGame () {
-      let numOfDecks = 1; //allows us in the future to apply more decks
-      //await pauses the buildGame method until the value of the fetch is returned
-        let deck_id = await fetchHandler("http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count="+numOfDecks)
-          .then((response) => response.json())
-          .then((formattedData) => formattedData.deck_id) //returns the Deck ID
-          .catch(error => {
-            let fakeGame = new Game(null);
-            fakeGame.typeOfOutCome = "Couldn't build the deck. Please leave, now."
-            fakeGame.endGame();
-            console.log(err)
-            throw("OOPS,",err)
-          })
-        return new Game(deck_id);
-  }
+    static async buildGame() {
+        let numOfDecks = 1; //allows us in the future to apply more decks
+        //await pauses the buildGame method until the value of the fetch is returned
+        let deck_id = await fetchHandler("http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=" + numOfDecks)
+            .then((response) => response.json())
+            .then((formattedData) => formattedData.deck_id) //returns the Deck ID
+            .catch(error => {
+                let fakeGame = new Game(null);
+                fakeGame.typeOfOutCome = "Couldn't build the deck. Please leave, now."
+                fakeGame.endGame();
+                console.log(err)
+                throw ("OOPS,", err)
+            })
+
+        let tempGame = new Game(deck_id);
+        await Promise.all([tempGame.drawCard(tempGame.player), tempGame.drawCard(tempGame.player), tempGame.drawCard(tempGame.dealer)]);
+
+        return tempGame;
+    }
 
 }
 

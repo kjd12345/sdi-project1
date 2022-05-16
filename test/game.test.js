@@ -50,9 +50,9 @@ describe('Test The Game Class', () => {
       expect(Array.isArray(testGame.player.hand)).toBe(true)
       expect(typeof testGame.player.hand[0]).toBe("object")
       expect(typeof testGame.player.hand[0].image).toBe("string")
-      expect(testGame.player.hand.length).toBe(1)
+      expect(testGame.player.hand.length).toBe(3)
     })
-    test("updates the score within the PLayer", async () => {
+    test("updates the score within the PLayer (will fail once in a while due to Aces)", async () => {
       let previousScore = testGame.player.score
       await testGame.drawCard(testGame.player)
       let newScore = testGame.player.score
@@ -104,13 +104,13 @@ describe('Test The Game Class', () => {
         testGame.player.score = 17;
         testGame.dealer.score = 21;
         testGame.evaluateOutcome();
-        expect(testGame.typeOfOutCome).toEqual("You Died");
+        expect(testGame.typeOfOutCome).toEqual("You Lost");
     })
     test("if scores are tied, it is a tie", async () => {
       testGame.player.score = 18;
       testGame.dealer.score = 18;
       testGame.evaluateOutcome();
-      expect(testGame.typeOfOutCome).toEqual("No Harm in Trying");
+      expect(testGame.typeOfOutCome).toEqual("Push");
     })
   })
 
@@ -120,13 +120,12 @@ describe('Test The Game Class', () => {
       testGame.typeOfOutCome = 'Winner Winner Chicken Dinner';
       testGame.endGame();
     })
-    test("dealerScore should be set on the page", () => {
-      expect(document.getElementById("dealerScore").innerText).toEqual(`Dealer Score: 17`);
-    })
-    test("gameOutcome text should be set on the page", () => {
+    test("gameOutcome text should be set on the page", async () => {
+      await new Promise(r => setTimeout(() => r(), 1000));
       expect(document.getElementById('gameOutcome').innerText).toEqual(`Winner Winner Chicken Dinner`);
     })
-    test("gameOutcome text should be not hidden", () => {
+    test("gameOutcome text should be not hidden", async () => {
+      await new Promise(r => setTimeout(() => r(), 1000));
       expect(document.getElementById('gameOutcome').hidden).toEqual(false);
     })
   })

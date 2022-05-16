@@ -24,10 +24,7 @@ describe('Tests the simple dealer logic', () => {
 
   beforeEach(async () => {
       //will need to instatiate a game class and have the user and dealer scores faked
-      testGame = await Game.buildGame().then(async (game) => {
-        await Promise.all([game.drawCard(game.player), game.drawCard(game.player), game.drawCard(game.dealer)]);
-        return game;
-      });
+      testGame = await Game.buildGame();
 
   })
     test('dealer is an object', () => {
