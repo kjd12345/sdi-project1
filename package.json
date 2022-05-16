@@ -1,12 +1,15 @@
 {
   "name": "project1-scaffold",
   "version": "1.0.0",
+  "jest": {
+    "verbose": true
+  },
   "description": "Add any files you see fit for your application to work. Make sure to change this README to include a description of your application and how to get it started.",
   "main": "./src/index.js",
   "type": "module",
   "scripts": {
     "start": "live-server .",
-    "test": "node --experimental-vm-modules node_modules/.bin/jest /test"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,11 +23,15 @@
   },
   "homepage": "https://github.com/kjd12345/sdi-blended-project1-scaffold#readme",
   "dependencies": {
-    "jsdom": "^19.0.0",
-    "live-server": "^1.2.2",
-    "node-fetch": "^2.6.7"
+    "live-server": "^1.2.2"
   },
   "devDependencies": {
-    "jest": "^28.1.0"
+    "@babel/core": "^7.17.10",
+    "@babel/preset-env": "^7.17.10",
+    "babel-jest": "^28.1.0",
+    "jest": "^28.1.0",
+    "jsdom": "^19.0.0",
+    "node-fetch": "^2.6.7",
+    "regenerator-runtime": "^0.13.9"
   }
 }

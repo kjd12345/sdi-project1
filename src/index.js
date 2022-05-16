@@ -21,23 +21,18 @@ let counter = 2;
 let indexGame = Game.buildGame();
 
 indexGame.then(async (game) => {//draws two cards
-  await Promise.all([game.drawCard(game.player), game.drawCard(game.player)]);
+  await Promise.all([game.drawCard(game.player), game.drawCard(game.player), game.drawCard(game.dealer)]);
   return game;
 }).then(game => {
   document.getElementById("playerCard1").src = game.player.hand[0].image;
   document.getElementById("playerCard2").src = game.player.hand[1].image;
   document.getElementById("playerScore").innerText = `Player Score: ${game.player.score}`;
-  document.getElementById("dealerScore").innerText = `Dealer Score: ${game.dealerScore}`;
+  document.getElementById("dealerScore").innerText = `Dealer Score: ${game.dealer.score}`;
   return game;
 }).then(game => {
   document.getElementById("hitButton").addEventListener("click", () => {
     if(game.typeOfOutCome === undefined) {
-      game.drawCard(game.player)
-        .then( () => {
-          document.getElementById(`playerCard${counter + 1}`).src = game.player.hand[counter].image;
-          document.getElementById("playerScore").innerText = `Player Score: ${game.player.score}`;
-          counter++;
-        })
+      game.drawCard(game.player);
     }
   });
   document.getElementById("standButton").addEventListener("click", () => {

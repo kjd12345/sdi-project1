@@ -10,18 +10,21 @@ body {
 #gameOutcome {
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 40%;
+  transform: translate(-50%, 0%);
   font-family: URW Chancery L, cursive;
   font-size: 50px;
-  color: #ef5350;
+  color: white;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: black;
 }
+
 #dealerScore {
   position: absolute;
   color: rgb(255, 255, 255);
   font-size: 40px;
-  top: 0px;
-  right: 200px;
+  top: -3%;
+  right: 1%;
 }
 
 #playerScore {
@@ -29,7 +32,7 @@ body {
   color: white;
   font-size: 40px;
   bottom: 10px;
-  right: 200px;
+  right: 1%;
 }
 
 .cardholder {
@@ -37,6 +40,7 @@ body {
   width: 186px;
   height: 264px;
   border-radius: 15px;
+  box-shadow: 3px 5px 3px 1px;
 }
 
 #playerCard1 {
@@ -64,19 +68,46 @@ body {
   top: 65%;
 }
 
-#newGameButton { /* Here is the syling for the newGameButton*/
+#dealerCard1 {
+  right: calc(50% + 307px);
+  bottom: 65%;
+}
+
+#dealerCard2 {
+  right: calc(50% + 107px);
+  bottom: 65%;
+}
+
+#dealerCard3 {
+  right: calc(50% - 93px);
+  bottom: 65%;
+}
+
+#dealerCard4 {
+  right: calc(50% - 293px);
+  bottom: 65%;
+}
+
+#dealerCard5 {
+  right: calc(50% - 493px);
+  bottom: 65%;
+}
+
+#newGameButton {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
-  width: 200px;
-  height: 50px;
+  width: 350px;
+  height: 55px;
   text-align: center;
-  line-height: 45px;
-  font-size: 20px;
+  line-height: 50px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 40px;
   bottom: 10px;
   border-radius: 15px;
   border-style: solid;
   border-color: rgba(0, 0, 0, 0.0);
+  left: 1%;
 }
 
 #hitButton {
@@ -109,6 +140,22 @@ body {
   border-color: black;
 }
 
+.container {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 350px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  bottom: 10px;
+  border-radius: 15px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.0);
+}
+
 .rounded {
   border-radius: 15px;
 }
@@ -127,6 +174,13 @@ body {
 }
 
 #standButton:hover {
+  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+  animation: rainbow_animation 6s ease-in-out infinite;
+  background-size: 400% 100%;
+}
+
+#newGameButton:hover {
+  color: black;
   background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
   animation: rainbow_animation 6s ease-in-out infinite;
   background-size: 400% 100%;

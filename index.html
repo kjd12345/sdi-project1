@@ -7,7 +7,7 @@
   <title>Blackjack Game</title>
 </head>
   <header>
-    <p id="dealerScore">Dealer Score: </p>
+    <p id="dealerScore" class="container">Dealer Score: </p>
   </header>
   <body>
     <img id="tempCard" class="rounded cardholder" src="./src/cardback.png"></img>
@@ -15,20 +15,21 @@
     <p id="gameOutcome" hidden>This paragraph should be hidden.</p>
     <!-- Player Cards ./src/cardback.png -->
 
-      <img id="playerCard1" class="rounded cardholder" src="https://m.media-amazon.com/images/I/51uITWtTYFL._AC_.jpg" width="186" height="264"></img>
+      <img id="playerCard1" class="rounded cardholder" src="https://m.media-amazon.com/images/I/51uITWtTYFL._AC_.jpg" width="186" height="264">
         <!-- document.getElementById('playerCard1').src= playerCard1; -->
-      <img id="playerCard2" class="rounded cardholder" src="https://m.media-amazon.com/images/I/51uITWtTYFL._AC_.jpg" width="186" height="264"></img>
-      <img id="playerCard3" class="rounded cardholder" src="https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png" width="186" height="264"></img>
-      <img id="playerCard4" class="rounded cardholder" src="https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png" width="186" height="264"></img>
-      <img id="playerCard5" class="rounded cardholder" src="https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png" width="186" height="264"></img>
+      <img id="playerCard2" class="rounded cardholder" src="https://m.media-amazon.com/images/I/51uITWtTYFL._AC_.jpg" width="186" height="264">
+      <img id="playerCard3" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
+      <img id="playerCard4" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
+      <img id="playerCard5" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
 
+      <img id="dealerCard1" class="rounded cardholder" src="./src/cardback.png" width="186" height="264">
+      <img id="dealerCard2" class="rounded cardholder" src="./src/cardback.png" width="186" height="264">
+      <img id="dealerCard3" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
+      <img id="dealerCard4" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
+      <img id="dealerCard5" class="rounded cardholder" src="./src/cardback.png" width="186" height="264" hidden>
 
     <!-- Hit/Stay Buttons -->
     <button type="button" id="hitButton" class="button" >Hit</button>
-    <!-- <script>
-      let standButton = document.getElementById("standButton")
-      standButton.addEventListener("click", alert('button was clicked from js'));
-    </script> -->
     <button type="button" id="standButton" class="button">Stand</div>
 
   </body>
@@ -37,12 +38,10 @@
 
 
   <footer>
-
+    <!-- New Game Button -->
     <button type="button" id="newGameButton" class="button" onclick="document.location.reload()">New Game</button>
-        <!-- New Game Button -->
-    <div id="playerScore">Player Score:</div>
-        <!-- This Holds The Players Score -->
-
+    <!-- This Holds The Players Score -->
+    <div id="playerScore" class="container">Player Score:</div>
   </footer>
 
 

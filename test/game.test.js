@@ -2,8 +2,7 @@
 // const require = createRequire(import.meta.url);
 // const Game = require('../src').Game;
 import Player from "../src/player.js"
-import Game from "../src/game2.js";
-
+import Game from "../src/game.js";
 import { JSDOM } from "jsdom";
 
 let dom;
@@ -17,17 +16,18 @@ let sampleCard = {
 
 describe('Test The Game Class', () => {
   beforeAll(async() => {
-    JSDOM.fromFile("./index.html")
-    .then(newDom => {
-      dom = newDom;
-    }).then( () => {
-      global.document = dom.window.document;
-      global.window = dom.window;
-    })
+
+    await JSDOM.fromFile("./index.html")
+      .then(newDom => {
+        dom = newDom;
+      }).then( () => {
+        global.document = dom.window.document;
+        global.window = dom.window;
+      })
   })
 
   beforeEach(async() => {
-    testGame = await Game.buildGame()
+    testGame = await Game.buildGame();
   })
 
   test("instantiates a game class ",  () => {
@@ -43,7 +43,7 @@ describe('Test The Game Class', () => {
 
   describe('test the player property', () => {
     beforeEach(async() => {
-      await testGame.drawCard(testGame.player)
+        await testGame.drawCard(testGame.player)
       })
 
     test("draws a card from for the Player", async () => {
@@ -78,36 +78,37 @@ describe('Test The Game Class', () => {
 
   describe("tests the stand() method", () => {
     beforeEach( async() => {
+      testGame.player.score = 1;
       await testGame.stand();
     })
     test("dealerScore should be set", () => {
-      expect(typeof testGame.dealerScore).toBe('number');
-      expect(testGame.dealerScore).toBeGreaterThan(0) //this means the score was reassigned
+      expect(typeof testGame.dealer.score).toBe('number');
+      expect(testGame.dealer.score).toBeGreaterThan(0) //this means the score was reassigned
     })
   })
 
   describe('tests the evaluateOutcome() method', () => {
     test("if player score is greater than dealer score, player wins", async () => {
       testGame.player.score = 21;
-      testGame.dealerScore = 18
+      testGame.dealer.score = 18;
       testGame.evaluateOutcome();
       expect(testGame.typeOfOutCome).toEqual("Winner Winner Chicken Dinner");
     })
     test("if the dealer busts, player wins", async () => {
       testGame.player.score = 17;
-      testGame.dealerScore = 24;
+      testGame.dealer.score = 24;
       testGame.evaluateOutcome();
       expect(testGame.typeOfOutCome).toEqual("Winner Winner Chicken Dinner");
     })
     test("if dealer score is greater than player, player loses", async () => {
         testGame.player.score = 17;
-        testGame.dealerScore = 21;
+        testGame.dealer.score = 21;
         testGame.evaluateOutcome();
         expect(testGame.typeOfOutCome).toEqual("You Died");
     })
     test("if scores are tied, it is a tie", async () => {
       testGame.player.score = 18;
-      testGame.dealerScore = 18;
+      testGame.dealer.score = 18;
       testGame.evaluateOutcome();
       expect(testGame.typeOfOutCome).toEqual("No Harm in Trying");
     })
@@ -115,7 +116,7 @@ describe('Test The Game Class', () => {
 
   describe("tests the endGame() method", () => {
     beforeEach( () => {
-      testGame.dealerScore = 17;
+      testGame.dealer.score = 17;
       testGame.typeOfOutCome = 'Winner Winner Chicken Dinner';
       testGame.endGame();
     })
@@ -131,12 +132,3 @@ describe('Test The Game Class', () => {
   })
 
 })
-
-
-
-
-
-
-
-
-
