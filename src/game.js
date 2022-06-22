@@ -20,7 +20,7 @@ export default class Game {
     }
 
     async drawCard(player) {
-        player.hand.push(await fetchHandler("https://deckofcardsapi.com/api/deck/" + this.deck_id + "/draw/?count=1" + '/')
+        player.hand.push(await fetchHandler("https://deckofcardsapi.com/api/deck/" + this.deck_id + "/draw/?count=1")
             .then(response => response.json())
             .then(formattedData => formattedData.cards[0])
             .catch(err => {
@@ -110,7 +110,7 @@ export default class Game {
     static async buildGame() {
         let numOfDecks = 1; //allows us in the future to apply more decks
         //await pauses the buildGame method until the value of the fetch is returned
-        let deck_id = await fetchHandler("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=" + numOfDecks + '/')
+        let deck_id = await fetchHandler("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=" + numOfDecks )
             .then((response) => response.json())
             .then((formattedData) => formattedData.deck_id) //returns the Deck ID
             .catch(error => {
